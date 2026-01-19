@@ -1,10 +1,10 @@
 package org.challenge;
 
-import org.challenge.util.Utils;
+import org.challenge.util.MenuUtils;
 
 public class Main {
     
     public static void main(String[] args) {
-        Utils.showExamples();
+        MenuUtils.runInteractiveMenu();
     }
 }
