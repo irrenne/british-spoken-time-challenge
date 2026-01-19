@@ -1,5 +1,7 @@
 package org.challenge.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.challenge.constant.TimeConstants;
 import org.challenge.converter.AbstractTimeNumberToWordConverter;
 import org.challenge.model.Time;
@@ -11,10 +13,8 @@ import java.util.stream.Stream;
 /**
  * Utility helpers for building British-spoken time phrases from numbers.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BritishSpokenTimeUtils {
-
-    private BritishSpokenTimeUtils() {
-    }
 
     public static boolean isMidnight(Time time) {
         return time.hour() == 0 && time.minute() == 0;

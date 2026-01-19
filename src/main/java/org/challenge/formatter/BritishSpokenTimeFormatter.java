@@ -1,5 +1,7 @@
 package org.challenge.formatter;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.challenge.constant.TimeConstants;
 import org.challenge.converter.AbstractTimeNumberToWordConverter;
 import org.challenge.model.Time;
@@ -10,20 +12,11 @@ import java.util.Objects;
 /**
  * Formats {@link Time} objects into British English spoken form.
  */
+@RequiredArgsConstructor
 public class BritishSpokenTimeFormatter implements TimeFormatter {
 
+    @NonNull
     private final AbstractTimeNumberToWordConverter converter;
-
-    /**
-     * Constructor for BritishSpokenTimeFormatter.
-     *
-     * @param converter converter for numbers to words
-     * @throws NullPointerException if numberConverter is null
-     */
-    public BritishSpokenTimeFormatter(AbstractTimeNumberToWordConverter converter) {
-        this.converter = Objects.requireNonNull(
-                converter, "Number converter must not be null");
-    }
 
     /**
      * Formats the given {@link Time} object into its British spoken time representation.

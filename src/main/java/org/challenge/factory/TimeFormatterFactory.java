@@ -1,5 +1,7 @@
 package org.challenge.factory;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.challenge.converter.EnglishTimeNumberToWordConverter;
 import org.challenge.formatter.BritishSpokenTimeFormatter;
 import org.challenge.formatter.TimeFormatter;
@@ -7,10 +9,8 @@ import org.challenge.formatter.TimeFormatter;
 /**
  * Simple Factory for creating {@link TimeFormatter} instances.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TimeFormatterFactory {
-
-    private TimeFormatterFactory() {
-    }
 
     /**
      * Creates a British spoken time formatter.

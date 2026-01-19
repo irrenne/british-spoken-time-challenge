@@ -1,5 +1,7 @@
 package org.challenge.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.challenge.exception.TimeException;
 import org.challenge.factory.TimeFormatterFactory;
 import org.challenge.formatter.TimeFormatter;
@@ -10,10 +12,8 @@ import java.util.Scanner;
 /**
  * Utility class responsible for running the interactive interface.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MenuUtils {
-
-    private MenuUtils() {
-    }
 
     private static final Time[] EXAMPLES = {
             Time.of(1, 0),

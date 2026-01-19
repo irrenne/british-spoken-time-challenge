@@ -1,12 +1,13 @@
 package org.challenge.constant;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * Constants used for time validation, formatting, and conversion.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TimeConstants {
-
-    private TimeConstants() {
-    }
 
     public static final String HH_MM_PATTERN = "\\d{1,2}:\\d{2}";
     public static final int MAX_HOUR = 23;
