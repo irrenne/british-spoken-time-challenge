@@ -2,8 +2,11 @@ package org.challenge.model;
 
 import org.challenge.exception.InvalidTimeException;
 
+import java.util.Objects;
+
 public record Time(int hour, int minute) {
 
+    private static final String HH_MM_PATTERN = "\\d{1,2}:\\d{2}";
     private static final int MAX_HOUR = 23;
     private static final int MIN_HOUR = 0;
     private static final int MAX_MINUTE = 59;
@@ -11,6 +14,24 @@ public record Time(int hour, int minute) {
 
     public Time {
         validate(hour, minute);
+    }
+
+    public static Time of(int hour, int minute) {
+        return new Time(hour, minute);
+    }
+
+    public static Time of(String input) {
+        Objects.requireNonNull(input, "Input cannot be null");
+
+        if (!input.matches(HH_MM_PATTERN)) {
+            throw new InvalidTimeException("Time must be in HH:MM format");
+        }
+
+        String[] parts = input.split(":");
+        return new Time(
+                Integer.parseInt(parts[0]),
+                Integer.parseInt(parts[1])
+        );
     }
 
     public int to12HourFormat() {
