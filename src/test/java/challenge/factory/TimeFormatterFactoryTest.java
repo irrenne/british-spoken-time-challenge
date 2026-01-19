@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Test suite for {@link TimeFormatterFactory}.
+ */
 class TimeFormatterFactoryTest {
 
     @Test

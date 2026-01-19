@@ -10,6 +10,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Test suite for {@link Time}.
+ */
 class TimeTest {
 
     @ParameterizedTest(name = "Hour {0}, Minute {1}")

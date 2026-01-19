@@ -10,6 +10,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Test suite for {@link BritishSpokenTimeFormatter}.
+ */
 class BritishSpokenTimeFormatterTest {
 
     private final BritishSpokenTimeFormatter formatter =

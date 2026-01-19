@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Formats {@link Time} objects into British English spoken form.
+ */
 public class BritishSpokenTimeFormatter implements TimeFormatter {
 
     private static final int O_CLOCK_MINUTES = 0;
@@ -29,11 +32,24 @@ public class BritishSpokenTimeFormatter implements TimeFormatter {
 
     private final AbstractTimeNumberToWordConverter timeNumberToWordConverter;
 
+    /**
+     * Constructor for BritishSpokenTimeFormatter.
+     *
+     * @param timeNumberToWordConverter converter for numbers to words
+     * @throws NullPointerException if numberConverter is null
+     */
     public BritishSpokenTimeFormatter(AbstractTimeNumberToWordConverter timeNumberToWordConverter) {
         this.timeNumberToWordConverter = Objects.requireNonNull(
                 timeNumberToWordConverter, "Number converter must not be null");
     }
 
+    /**
+     * Formats the given {@link Time} object into its British spoken time representation.
+     *
+     * @param time the time to format
+     * @return the British spoken form of the time
+     * @throws NullPointerException if time is null
+     */
     @Override
     public String format(Time time) {
         Objects.requireNonNull(time, "Time must not be null");

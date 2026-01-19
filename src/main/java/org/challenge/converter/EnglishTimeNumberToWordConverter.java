@@ -2,6 +2,9 @@ package org.challenge.converter;
 
 import org.challenge.exception.NumberToWordConversionException;
 
+/**
+ * Converts numbers to English word representations for British English time expressions.
+ */
 public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberToWordConverter {
 
     private static final int UNITS_THRESHOLD = 20;
@@ -29,6 +32,13 @@ public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberTo
         return TENS;
     }
 
+    /**
+     * Converts number 0-59 to word representation.
+     *
+     * @param number the number to convert
+     * @return the word representation
+     * @throws NumberToWordConversionException if number is outside supported range
+     */
     @Override
     public String convert(int number) {
         if (number < 0 || number >= MAX_TIME_NUMBER_SUPPORTED) {

@@ -4,6 +4,13 @@ import org.challenge.exception.InvalidTimeException;
 
 import java.util.Objects;
 
+/**
+ * Represents a time value with hour and minute components.
+ * Uses 24-hour format and provides conversion to 12-hour format.
+ *
+ * @param hour   the hour component
+ * @param minute the minute component
+ */
 public record Time(int hour, int minute) {
 
     private static final String HH_MM_PATTERN = "\\d{1,2}:\\d{2}";
@@ -12,14 +19,37 @@ public record Time(int hour, int minute) {
     private static final int MAX_MINUTE = 59;
     private static final int MIN_MINUTE = 0;
 
+    /**
+     * Constructor with validation for hours and minutes.
+     *
+     * @param hour   hour in 24-hour format
+     * @param minute minute
+     * @throws InvalidTimeException if hour or minute are out of bounds
+     */
     public Time {
         validate(hour, minute);
     }
 
+    /**
+     * Creates a {@link Time} object from hour and minute integers.
+     *
+     * @param hour   hour in 24-hour format
+     * @param minute minute
+     * @return a {@link Time} object
+     * @throws InvalidTimeException if hour or minute are invalid
+     */
     public static Time of(int hour, int minute) {
         return new Time(hour, minute);
     }
 
+    /**
+     * Creates a {@link Time} object by parsing a string in "HH:MM" format.
+     *
+     * @param input the string to parse
+     * @return a {@link Time} object
+     * @throws NullPointerException if input is null
+     * @throws InvalidTimeException if input format is invalid or values are out of range
+     */
     public static Time of(String input) {
         Objects.requireNonNull(input, "Input cannot be null");
 
@@ -34,19 +64,34 @@ public record Time(int hour, int minute) {
         );
     }
 
+    /**
+     * Converts the 24-hour format hour to 12-hour format.
+     *
+     * @return hour in 12-hour format
+     */
     public int to12HourFormat() {
         int hour = this.hour % 12;
         return hour == 0 ? 12 : hour;
     }
 
+    /**
+     * Returns the next hour in 12-hour format.
+     *
+     * @return next hour in 12-hour format
+     */
     public int nextHour12Format() {
         int currentHour = to12HourFormat();
         return currentHour == 12 ? 1 : currentHour + 1;
     }
 
+    /**
+     * Converts the {@link Time} object into a string in "HH:MM" format.
+     *
+     * @return string representation of the time
+     */
     @Override
     public String toString() {
-        return String.format("%02d:%02d", hour, minute);
+        return String.format("%d:%02d", hour, minute);
     }
 
     private static void validate(int hour, int minute) {

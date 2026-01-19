@@ -7,6 +7,9 @@ import org.challenge.model.Time;
 
 import java.util.Scanner;
 
+/**
+ * Utility class responsible for running the interactive interface.
+ */
 public final class MenuUtils {
 
     private MenuUtils() {
