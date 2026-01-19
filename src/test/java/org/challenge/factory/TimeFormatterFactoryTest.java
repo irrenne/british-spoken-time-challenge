@@ -1,6 +1,5 @@
-package challenge.factory;
+package org.challenge.factory;
 
-import org.challenge.factory.TimeFormatterFactory;
 import org.challenge.formatter.BritishSpokenTimeFormatter;
 import org.challenge.formatter.TimeFormatter;
 import org.junit.jupiter.api.Test;

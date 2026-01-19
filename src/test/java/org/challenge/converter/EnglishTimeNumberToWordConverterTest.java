@@ -1,6 +1,5 @@
-package challenge.converter;
+package org.challenge.converter;
 
-import org.challenge.converter.EnglishTimeNumberToWordConverter;
 import org.challenge.exception.TimeErrorReason;
 import org.challenge.exception.TimeException;
 import org.junit.jupiter.api.Test;

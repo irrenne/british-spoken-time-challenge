@@ -1,7 +1,6 @@
-package challenge.formatter;
+package org.challenge.formatter;
 
 import org.challenge.converter.EnglishTimeNumberToWordConverter;
-import org.challenge.formatter.BritishSpokenTimeFormatter;
 import org.challenge.model.Time;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
