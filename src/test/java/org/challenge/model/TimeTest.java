@@ -1,8 +1,7 @@
-package challenge.model;
+package org.challenge.model;
 
 import org.challenge.exception.TimeErrorReason;
 import org.challenge.exception.TimeException;
-import org.challenge.model.Time;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

@@ -1,8 +1,7 @@
-package challenge.util;
+package org.challenge.util;
 
 import org.challenge.converter.EnglishTimeNumberToWordConverter;
 import org.challenge.model.Time;
-import org.challenge.util.BritishSpokenTimeUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
