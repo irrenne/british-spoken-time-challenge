@@ -1,7 +1,8 @@
 package challenge.converter;
 
 import org.challenge.converter.EnglishTimeNumberToWordConverter;
-import org.challenge.exception.NumberToWordConversionException;
+import org.challenge.exception.TimeErrorReason;
+import org.challenge.exception.TimeException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -54,15 +55,16 @@ class EnglishTimeNumberToWordConverterTest {
 
     @Test
     void testInvalidNegative() {
-        assertThrows(NumberToWordConversionException.class, () -> converter.convert(-1),
+        TimeException exception = assertThrows(TimeException.class, () -> converter.convert(-1),
                 "Should throw exception for negative numbers");
+        assertEquals(TimeErrorReason.UNSUPPORTED_NUMBER, exception.getReason());
     }
 
     @Test
     void testInvalidTooHigh() {
-        assertThrows(NumberToWordConversionException.class, () -> converter.convert(60),
+        TimeException exception = assertThrows(TimeException.class, () -> converter.convert(100),
                 "Should throw exception for numbers > 59");
-        assertThrows(NumberToWordConversionException.class, () -> converter.convert(100),
-                "Should throw exception for numbers > 59");
+        assertEquals(TimeErrorReason.UNSUPPORTED_NUMBER, exception.getReason());
     }
 }
+

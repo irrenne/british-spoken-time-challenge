@@ -1,6 +1,6 @@
 package org.challenge.util;
 
-import org.challenge.exception.InvalidTimeException;
+import org.challenge.exception.TimeException;
 import org.challenge.factory.TimeFormatterFactory;
 import org.challenge.formatter.TimeFormatter;
 import org.challenge.model.Time;
@@ -72,7 +72,7 @@ public final class MenuUtils {
             try {
                 Time time = Time.of(input);
                 System.out.println("British spoken time: " + formatter.format(time));
-            } catch (InvalidTimeException e) {
+            } catch (TimeException e) {
                 System.out.println("Invalid input: " + e.getMessage());
             }
         }
@@ -85,3 +85,4 @@ public final class MenuUtils {
         }
     }
 }
+

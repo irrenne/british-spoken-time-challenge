@@ -1,15 +1,13 @@
 package org.challenge.converter;
 
-import org.challenge.exception.NumberToWordConversionException;
+import org.challenge.constant.TimeConstants;
+import org.challenge.exception.TimeErrorReason;
+import org.challenge.exception.TimeException;
 
 /**
  * Converts numbers to English word representations for British English time expressions.
  */
 public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberToWordConverter {
-
-    private static final int UNITS_THRESHOLD = 20;
-    private static final int MAX_TIME_NUMBER_SUPPORTED = 60;
-    private static final int TENS_INDEX_OFFSET = 2;
 
     private static final String[] UNITS = {
             "", "one", "two", "three", "four", "five", "six",
@@ -37,23 +35,24 @@ public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberTo
      *
      * @param number the number to convert
      * @return the word representation
-     * @throws NumberToWordConversionException if number is outside supported range
+     * @throws TimeException if number is outside supported range
      */
     @Override
     public String convert(int number) {
-        if (number < 0 || number >= MAX_TIME_NUMBER_SUPPORTED) {
-            throw new NumberToWordConversionException(
+        if (number < 0 || number >= TimeConstants.MAX_TIME_NUMBER_SUPPORTED) {
+            throw new TimeException(
+                    TimeErrorReason.UNSUPPORTED_NUMBER,
                     String.format("Unsupported number: %d. Supported range is 0-59", number));
         }
 
-        if (number < UNITS_THRESHOLD) {
+        if (number < TimeConstants.UNITS_THRESHOLD) {
             return UNITS[number];
         }
 
         int tensIndex = number / 10;
         int unitsIndex = number % 10;
 
-        String tensWord = TENS[tensIndex - TENS_INDEX_OFFSET];
+        String tensWord = TENS[tensIndex - TimeConstants.TENS_INDEX_OFFSET];
 
         if (unitsIndex == 0) {
             return tensWord;
@@ -62,3 +61,4 @@ public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberTo
         return tensWord + delimiter() + UNITS[unitsIndex];
     }
 }
+

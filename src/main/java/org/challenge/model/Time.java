@@ -1,6 +1,8 @@
 package org.challenge.model;
 
-import org.challenge.exception.InvalidTimeException;
+import org.challenge.constant.TimeConstants;
+import org.challenge.exception.TimeErrorReason;
+import org.challenge.exception.TimeException;
 
 import java.util.Objects;
 
@@ -13,18 +15,12 @@ import java.util.Objects;
  */
 public record Time(int hour, int minute) {
 
-    private static final String HH_MM_PATTERN = "\\d{1,2}:\\d{2}";
-    private static final int MAX_HOUR = 23;
-    private static final int MIN_HOUR = 0;
-    private static final int MAX_MINUTE = 59;
-    private static final int MIN_MINUTE = 0;
-
     /**
      * Constructor with validation for hours and minutes.
      *
      * @param hour   hour in 24-hour format
      * @param minute minute
-     * @throws InvalidTimeException if hour or minute are out of bounds
+     * @throws TimeException if hour or minute are out of bounds
      */
     public Time {
         validate(hour, minute);
@@ -36,7 +32,7 @@ public record Time(int hour, int minute) {
      * @param hour   hour in 24-hour format
      * @param minute minute
      * @return a {@link Time} object
-     * @throws InvalidTimeException if hour or minute are invalid
+     * @throws TimeException if hour or minute are invalid
      */
     public static Time of(int hour, int minute) {
         return new Time(hour, minute);
@@ -48,13 +44,23 @@ public record Time(int hour, int minute) {
      * @param input the string to parse
      * @return a {@link Time} object
      * @throws NullPointerException if input is null
-     * @throws InvalidTimeException if input format is invalid or values are out of range
+     * @throws TimeException        if input format is invalid or values are out of range
      */
     public static Time of(String input) {
         Objects.requireNonNull(input, "Input cannot be null");
 
-        if (!input.matches(HH_MM_PATTERN)) {
-            throw new InvalidTimeException("Time must be in HH:MM format");
+        if (input.isBlank()) {
+            throw new TimeException(
+                    TimeErrorReason.EMPTY_INPUT,
+                    "Input cannot be empty or blank"
+            );
+        }
+
+        if (!input.matches(TimeConstants.HH_MM_PATTERN)) {
+            throw new TimeException(
+                    TimeErrorReason.INVALID_TIME_FORMAT,
+                    "Time must be in HH:MM format"
+            );
         }
 
         String[] parts = input.split(":");
@@ -95,13 +101,18 @@ public record Time(int hour, int minute) {
     }
 
     private static void validate(int hour, int minute) {
-        if (hour < MIN_HOUR || hour > MAX_HOUR) {
-            throw new InvalidTimeException(
-                    String.format("Hour must be between %d and %d, but was %d", MIN_HOUR, MAX_HOUR, hour));
+        if (hour < TimeConstants.MIN_HOUR || hour > TimeConstants.MAX_HOUR) {
+            throw new TimeException(
+                    TimeErrorReason.INVALID_HOUR_RANGE,
+                    String.format("Hour must be between %d and %d, but was %d",
+                            TimeConstants.MIN_HOUR, TimeConstants.MAX_HOUR, hour));
         }
-        if (minute < MIN_MINUTE || minute > MAX_MINUTE) {
-            throw new InvalidTimeException(
-                    String.format("Minute must be between %d and %d, but was %d", MIN_MINUTE, MAX_MINUTE, minute));
+        if (minute < TimeConstants.MIN_MINUTE || minute > TimeConstants.MAX_MINUTE) {
+            throw new TimeException(
+                    TimeErrorReason.INVALID_MINUTE_RANGE,
+                    String.format("Minute must be between %d and %d, but was %d",
+                            TimeConstants.MIN_MINUTE, TimeConstants.MAX_MINUTE, minute));
         }
     }
 }
+

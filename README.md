@@ -37,3 +37,10 @@ mvn test
 ```bash
 mvn exec:java -Dexec.mainClass="org.challenge.Main"
 ```
+
+## Run with Docker
+
+```bash
+docker build -t british-spoken-time .
+docker run -it --rm british-spoken-time
+```

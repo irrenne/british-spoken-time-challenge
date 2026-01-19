@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class TimeFormatterFactoryTest {
 
     @Test
-    void createBritishSpokenFormatter_shouldReturnNonNull() {
+    void testCreateBritishSpokenFormatterShouldReturnNonNull() {
         TimeFormatter formatter = TimeFormatterFactory.createBritishSpokenTimeFormatter();
         assertNotNull(formatter, "Factory should not return null");
     }
 
     @Test
-    void createBritishSpokenFormatter_shouldReturnCorrectType() {
+    void testCreateBritishSpokenFormatterShouldReturnCorrectType() {
         TimeFormatter formatter = TimeFormatterFactory.createBritishSpokenTimeFormatter();
         assertInstanceOf(BritishSpokenTimeFormatter.class, formatter, "Factory should return a BritishSpokenTimeFormatter");
     }

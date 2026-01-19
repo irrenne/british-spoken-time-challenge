@@ -1,6 +1,7 @@
 package challenge.model;
 
-import org.challenge.exception.InvalidTimeException;
+import org.challenge.exception.TimeErrorReason;
+import org.challenge.exception.TimeException;
 import org.challenge.model.Time;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -83,30 +84,35 @@ class TimeTest {
             "12-30"
     })
     void shouldRejectInvalidStringInput(String input) {
-        assertThrows(InvalidTimeException.class, () -> Time.of(input));
+        assertThrows(TimeException.class, () -> Time.of(input));
     }
 
     @Test
     void testInvalidHourTooLow() {
-        assertThrows(InvalidTimeException.class, () -> Time.of(-1, 0),
-                "Should throw InvalidTimeException for hour < 0");
+        TimeException exception = assertThrows(TimeException.class, () -> Time.of(-1, 0),
+                "Should throw TimeException for hour < 0");
+        assertEquals(TimeErrorReason.INVALID_HOUR_RANGE, exception.getReason());
     }
 
     @Test
     void testInvalidHourTooHigh() {
-        assertThrows(InvalidTimeException.class, () -> Time.of(24, 0),
-                "Should throw InvalidTimeException for hour > 23");
+        TimeException exception = assertThrows(TimeException.class, () -> Time.of(24, 0),
+                "Should throw TimeException for hour > 23");
+        assertEquals(TimeErrorReason.INVALID_HOUR_RANGE, exception.getReason());
     }
 
     @Test
     void testInvalidMinuteTooLow() {
-        assertThrows(InvalidTimeException.class, () -> Time.of(12, -1),
-                "Should throw InvalidTimeException for minute < 0");
+        TimeException exception = assertThrows(TimeException.class, () -> Time.of(12, -1),
+                "Should throw TimeException for minute < 0");
+        assertEquals(TimeErrorReason.INVALID_MINUTE_RANGE, exception.getReason());
     }
 
     @Test
     void testInvalidMinuteTooHigh() {
-        assertThrows(InvalidTimeException.class, () -> Time.of(12, 60),
-                "Should throw InvalidTimeException for minute > 59");
+        TimeException exception = assertThrows(TimeException.class, () -> Time.of(12, 60),
+                "Should throw TimeException for minute > 59");
+        assertEquals(TimeErrorReason.INVALID_MINUTE_RANGE, exception.getReason());
     }
 }
+
