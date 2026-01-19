@@ -1,5 +1,7 @@
 package org.challenge.converter;
 
+import org.challenge.exception.NumberToWordConversionException;
+
 public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberToWordConverter {
 
     private static final int UNITS_THRESHOLD = 20;
@@ -30,7 +32,7 @@ public final class EnglishTimeNumberToWordConverter extends AbstractTimeNumberTo
     @Override
     public String convert(int number) {
         if (number < 0 || number >= MAX_TIME_NUMBER_SUPPORTED) {
-            throw new IllegalArgumentException(
+            throw new NumberToWordConversionException(
                     String.format("Unsupported number: %d. Supported range is 0-59", number));
         }
 

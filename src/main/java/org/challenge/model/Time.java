@@ -1,5 +1,7 @@
 package org.challenge.model;
 
+import org.challenge.exception.InvalidTimeException;
+
 public record Time(int hour, int minute) {
 
     private static final int MAX_HOUR = 23;
@@ -28,11 +30,11 @@ public record Time(int hour, int minute) {
 
     private static void validate(int hour, int minute) {
         if (hour < MIN_HOUR || hour > MAX_HOUR) {
-            throw new IllegalArgumentException(
+            throw new InvalidTimeException(
                     String.format("Hour must be between %d and %d, but was %d", MIN_HOUR, MAX_HOUR, hour));
         }
         if (minute < MIN_MINUTE || minute > MAX_MINUTE) {
-            throw new IllegalArgumentException(
+            throw new InvalidTimeException(
                     String.format("Minute must be between %d and %d, but was %d", MIN_MINUTE, MAX_MINUTE, minute));
         }
     }
